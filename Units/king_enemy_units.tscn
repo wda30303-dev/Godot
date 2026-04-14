@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy32gi0dl8r7m"]
+
+[ext_resource type="Script" uid="uid://c2flcnuafmb1x" path="res://Units/king_enemy_units.gd" id="1_wxhxs"]
+[ext_resource type="Texture2D" uid="uid://v8te57co4dvq" path="res://圖片/concrete_spec.png" id="2_wxhxs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66gmj"]
+size = Vector2(245.953, 253.406)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c2lr"]
+size = Vector2(769.697, 547.821)
+
+[node name="KingEnemyUnits" type="CharacterBody2D"]
+position = Vector2(540, 459)
+scale = Vector2(0.33543, 0.33543)
+collision_layer = 2
+script = ExtResource("1_wxhxs")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.45316, 2.98118)
+scale = Vector2(0.120822, 0.122278)
+texture = ExtResource("2_wxhxs")
+
+[node name="FloorRay" type="RayCast2D" parent="."]
+position = Vector2(0, 128.194)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+position = Vector2(6.70776, 1.4906)
+shape = SubResource("RectangleShape2D_66gmj")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.29901, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-7.94775, 65.245)
+rotation = -3.14159
+scale = Vector2(0.229812, 0.229812)
+shape = SubResource("RectangleShape2D_3c2lr")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -86.4562
+offset_top = -184.837
+offset_right = 104.544
+offset_bottom = -115.837
+theme_override_font_sizes/font_size = 50
+text = "100/100"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_attack_range_body_entered"]

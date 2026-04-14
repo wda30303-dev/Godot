@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bq34oqmab67k6"]
+
+[ext_resource type="Script" uid="uid://47kvgn35xjq7" path="res://Units/enemy_units.gd" id="1_66gmj"]
+
+[sub_resource type="ExternalTexture" id="ExternalTexture_wlqir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66gmj"]
+size = Vector2(257.878, 253.406)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c2lr"]
+size = Vector2(800.073, 547.821)
+
+[node name="EnemyUnits" type="CharacterBody2D" unique_id=1426986281]
+position = Vector2(540, 459)
+scale = Vector2(0.245754, 0.236469)
+collision_layer = 2
+script = ExtResource("1_66gmj")
+max_hp = 50
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=129701526]
+texture = SubResource("ExternalTexture_wlqir")
+
+[node name="FloorRay" type="RayCast2D" parent="." unique_id=139186891]
+position = Vector2(0, 128.194)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1665508969]
+visibility_layer = 2
+position = Vector2(0.745239, 1.4906)
+shape = SubResource("RectangleShape2D_66gmj")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1558973062]
+scale = Vector2(1.29901, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1549149122]
+position = Vector2(-11.4381, 65.245)
+rotation = -3.14159
+scale = Vector2(0.229812, 0.229812)
+shape = SubResource("RectangleShape2D_3c2lr")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=1008395355]
+offset_left = -86.4562
+offset_top = -184.837
+offset_right = 104.544
+offset_bottom = -115.837
+theme_override_font_sizes/font_size = 50
+text = "100/100"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_attack_range_body_entered"]

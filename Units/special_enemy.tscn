@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://78prato17pbn"]
+
+[ext_resource type="Script" uid="uid://ccllkuam7dykh" path="res://Units/special_enemy.gd" id="1_et72n"]
+
+[sub_resource type="ExternalTexture" id="ExternalTexture_unsxe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d30ty"]
+size = Vector2(257.878, 253.406)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cltf7"]
+size = Vector2(837.74, 481.711)
+
+[node name="SpecialEnemy" type="CharacterBody2D"]
+position = Vector2(540, 204)
+scale = Vector2(0.24, 0.24)
+collision_layer = 2
+script = ExtResource("1_et72n")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 128)
+texture = SubResource("ExternalTexture_unsxe")
+
+[node name="FloorRay" type="RayCast2D" parent="."]
+position = Vector2(-4.16667, 208.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_d30ty")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(4, 1)
+scale = Vector2(1.29901, 1)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-15.8754, 196)
+rotation = -3.14159
+scale = Vector2(0.229812, 0.229812)
+shape = SubResource("RectangleShape2D_cltf7")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -86.4562
+offset_top = -184.837
+offset_right = 104.544
+offset_bottom = -115.837
+theme_override_font_sizes/font_size = 50
+text = "100/100"
+horizontal_alignment = 1

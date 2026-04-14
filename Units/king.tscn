@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://73kybilneu7k"]
+
+[ext_resource type="Script" uid="uid://botuikfy3wcb2" path="res://Units/king.gd" id="1_ktu62"]
+
+[sub_resource type="Gradient" id="Gradient_3rhbk"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.993939, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ktu62"]
+gradient = SubResource("Gradient_3rhbk")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rhbk"]
+size = Vector2(154, 145)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktu62"]
+size = Vector2(85, 95)
+
+[node name="King" type="CharacterBody2D" groups=["player_units"]]
+position = Vector2(243, 69)
+scale = Vector2(0.753846, 0.8)
+collision_mask = 2
+script = ExtResource("1_ktu62")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, 36)
+scale = Vector2(2.44444, 2.33333)
+texture = SubResource("GradientTexture2D_ktu62")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+position = Vector2(-6, 36.5)
+shape = SubResource("RectangleShape2D_3rhbk")
+
+[node name="FloorRay" type="RayCast2D" parent="."]
+position = Vector2(-7, 79)
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -37.0
+offset_top = -73.0
+offset_right = 40.0
+offset_bottom = -14.0
+theme_override_font_sizes/font_size = 20
+text = "100/100
+"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(32.5, 57.5)
+shape = SubResource("RectangleShape2D_ktu62")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_attack_range_body_entered"]

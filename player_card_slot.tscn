@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dko5p4pyv6jl7"]
+
+[sub_resource type="GDScript" id="GDScript_mii5k"]
+script/source = "extends Control
+class_name PlayerCardSlot
+
+@onready var name_label = $CardName
+@onready var desc_label = $Description
+@onready var cooldown_bar = $CooldownBar
+@onready var use_button = $UseButton
+@onready var cooldown_label = $CooldownLabel # ✅ 新增 Label 用來顯示冷卻秒數
+
+var card: TacticCard = null
+var cooldown_timer: float = 0.0
+var is_on_cooldown := false
+
+
+func _ready():
+	use_button.pressed.connect(_on_use_pressed)
+	clear_card()  # 初始隱藏
+
+
+# 🃏 設定卡片（顯示卡槽）
+func set_card(new_card: TacticCard):
+	card = new_card
+	name_label.text = card.name
+	desc_label.text = card.description
+	cooldown_bar.value = 0
+	cooldown_label.text = \"\"  # ✅ 清空冷卻顯示
+	is_on_cooldown = false
+	use_button.disabled = false
+	modulate = Color(1, 1, 1, 1)  # ✅ 還原顏色（亮起）
+	show()
+	set_process(true)
+
+
+
+
+# ❌ 清除卡片（隱藏卡槽）
+func clear_card():
+	card = null
+	name_label.text = \"\"
+	desc_label.text = \"\"
+	cooldown_bar.value = 0
+	cooldown_label.text = \"\"
+	use_button.disabled = true
+	hide()  # 隱藏卡槽
+
+
+# 🔄 更新冷卻條
+func _process(delta):
+	if is_on_cooldown and card != null:
+		cooldown_timer -= delta
+		if cooldown_timer < 0:
+			cooldown_timer = 0
+
+		var ratio = 1.0 - (cooldown_timer / card.cooldown_time)
+		cooldown_bar.value = ratio * 100
+		modulate = Color(1, 1, 1, 0.5)  # 灰化顯示
+
+		if cooldown_timer <= 0:
+			is_on_cooldown = false
+			use_button.disabled = false
+			modulate = Color(1, 1, 1, 1)  # 恢復顯示
+
+
+
+# ⚔️ 使用戰術卡
+func _on_use_pressed():
+	if card == null or is_on_cooldown:
+		print(\"⏳ 卡片不存在或冷卻中\")
+		return
+
+	var cooldown_time = card.cooldown_time  # ✅ 提前保存
+	var rarity = card.rarity
+
+	var manager = get_node_or_null(\"/root/MainScene/PlayerTacticManager\")
+	if manager:
+		manager.use_card(rarity)
+	else:
+		print(\"❌ 找不到 PlayerTacticManager\")
+		return
+
+	is_on_cooldown = true
+	cooldown_timer = cooldown_time
+	use_button.disabled = true
+	modulate = Color(1, 1, 1, 0.5)
+"
+
+[node name="PlayerCardSlot" type="Control" unique_id=1876617205]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 368.0
+offset_top = 205.0
+offset_right = 408.0
+offset_bottom = 245.0
+script = SubResource("GDScript_mii5k")
+
+[node name="CardName" type="Label" parent="." unique_id=1416128477]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Description" type="Label" parent="." unique_id=1322108164]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CooldownBar" type="TextureProgressBar" parent="." unique_id=1303409231]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UseButton" type="Button" parent="." unique_id=1310037603]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 70.0
+
+[node name="CooldownLabel" type="Label" parent="." unique_id=2040615384]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

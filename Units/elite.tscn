@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c77016mtbv5nn"]
+
+[ext_resource type="Script" uid="uid://6kcmaf68slnc" path="res://Units/elite.gd" id="1_j27hq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5s8ih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j27hq"]
+size = Vector2(102, 102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xj5qr"]
+size = Vector2(45.5994, 62.5)
+
+[node name="Elite" type="CharacterBody2D" groups=["player_units"]]
+position = Vector2(435, 179)
+scale = Vector2(0.774791, 0.773731)
+collision_mask = 2
+script = ExtResource("1_j27hq")
+max_hp = 50
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.201032, 0.201032)
+texture = SubResource("NoiseTexture2D_5s8ih")
+
+[node name="FloorRay" type="RayCast2D" parent="."]
+position = Vector2(-10.3254, 5.16976)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+shape = SubResource("RectangleShape2D_j27hq")
+
+[node name="AttackRange" type="Area2D" parent="."]
+scale = Vector2(-1.59524, 0.952381)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(-12.7996, 21.25)
+shape = SubResource("RectangleShape2D_xj5qr")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -37.0
+offset_top = -73.0
+offset_right = 40.0
+offset_bottom = -14.0
+theme_override_font_sizes/font_size = 20
+text = "100/100
+"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

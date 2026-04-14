@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dr8tarvqdctle"]
+
+[ext_resource type="Script" uid="uid://b0g2nkx7lthk6" path="res://ControlNode.gd" id="1_wh83m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wh83m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3j7o"]
+size = Vector2(214.77986, 164.62149)
+
+[node name="ControlNode" type="Area2D" unique_id=79061033]
+position = Vector2(281, 157)
+scale = Vector2(1, 0.96)
+collision_mask = 3
+script = ExtResource("1_wh83m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=233849473]
+position = Vector2(0, -3.8146973e-06)
+scale = Vector2(0.35644564, -0.637447)
+texture = SubResource("NoiseTexture2D_wh83m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=653353107]
+position = Vector2(1, 0)
+scale = Vector2(0.8473793, -2.00754)
+shape = SubResource("RectangleShape2D_e3j7o")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=346856898]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="Label" type="Label" parent="." unique_id=798635248]
+offset_left = -18.0
+offset_top = -15.625001
+offset_right = 22.0
+offset_bottom = 7.374999
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,330 @@
+[gd_scene format=3 uid="uid://ca4cv3jo28214"]
+
+[ext_resource type="Script" uid="uid://cwmb0ruo3h6oc" path="res://input_panel.gd" id="1_pjpa4"]
+[ext_resource type="Script" uid="uid://dodxxtgvhv6r5" path="res://guess_engine.gd" id="1_xj5yv"]
+[ext_resource type="Script" uid="uid://cjoaxyc70tkbq" path="res://game_controller.gd" id="2_bxsma"]
+[ext_resource type="Script" uid="uid://dqr5bmtap1fsf" path="res://EnemyCastle.gd" id="2_wd1uf"]
+[ext_resource type="Script" uid="uid://m2ph4wvd74vr" path="res://PlayerCastle.gd" id="3_0o8ui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxsma"]
+size = Vector2(105, 152)
+
+[sub_resource type="Gradient" id="Gradient_wd1uf"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0o8ui"]
+gradient = SubResource("Gradient_wd1uf")
+fill_from = Vector2(1, 0.0131004)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gxew"]
+size = Vector2(98, 157)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ledqy"]
+size = Vector2(100, 154)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkrbl"]
+size = Vector2(63.6612, 40.5908)
+
+[sub_resource type="Gradient" id="Gradient_lkrbl"]
+offsets = PackedFloat32Array(0, 0.00606061)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wd1uf"]
+gradient = SubResource("Gradient_lkrbl")
+
+[node name="MainScene" type="Node2D" unique_id=88391980]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=690969248]
+
+[node name="InputPanel" type="Control" parent="UI" unique_id=1100612917]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 669.0
+offset_right = 59.0
+offset_bottom = 709.0
+script = ExtResource("1_pjpa4")
+
+[node name="NumberInput" type="LineEdit" parent="UI/InputPanel" unique_id=1294523982]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 7.0
+offset_right = 115.0
+offset_bottom = 38.0
+focus_mode = 2
+keep_editing_on_text_submit = true
+
+[node name="SubmitButton" type="Button" parent="UI/InputPanel" unique_id=203772317]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 7.00002
+offset_right = 160.0
+offset_bottom = 15.0
+scale = Vector2(3.56, 3.56)
+button_mask = 7
+focus_mode = 0
+
+[node name="FeedbackLabel" type="Label" parent="UI/InputPanel" unique_id=2147476]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 92.0
+offset_bottom = 89.0
+
+[node name="PointDisplay" type="Label" parent="UI" unique_id=403264989]
+offset_left = 1004.0
+offset_top = 24.0
+offset_right = 1044.0
+offset_bottom = 47.0
+text = "123"
+
+[node name="UnitSummonPanel" type="Control" parent="UI" unique_id=754382024]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -120.0
+offset_top = 27.0
+offset_right = -9.0
+offset_bottom = 115.0
+
+[node name="SummonInfantry" type="Button" parent="UI/UnitSummonPanel" unique_id=354923396]
+layout_mode = 0
+offset_left = 935.0
+offset_top = -108.0
+offset_right = 943.0
+offset_bottom = -100.0
+scale = Vector2(13.3032, 3.68496)
+
+[node name="summonking" type="Button" parent="UI/UnitSummonPanel" unique_id=1063427170]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 633.0
+offset_right = 361.0
+offset_bottom = 641.0
+scale = Vector2(7.88299, 7.16001)
+
+[node name="Label" type="Label" parent="UI/UnitSummonPanel/summonking" unique_id=601818294]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.487248, 0.352262)
+text = "王"
+
+[node name="GuessHistoryPanel" type="Panel" parent="UI" unique_id=298546445]
+offset_top = 2.0
+offset_right = 400.0
+offset_bottom = 202.0
+scale = Vector2(1, 0.921)
+metadata/_edit_group_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/GuessHistoryPanel" unique_id=2028158540]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 200.0
+scale = Vector2(1, 0.996148)
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer" unique_id=1433749209]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer" unique_id=221067113]
+layout_mode = 2
+text = "本次猜測結果"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer" unique_id=34254407]
+layout_mode = 2
+
+[node name="PlayerResultBox" type="VBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=977693094]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/PlayerResultBox" unique_id=1195202171]
+layout_mode = 2
+text = "我方校對"
+
+[node name="ColorRect" type="ColorRect" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/PlayerResultBox" unique_id=1378136498]
+layout_mode = 2
+color = Color(0.266667, 0.6, 1, 1)
+
+[node name="Label" type="Label" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/PlayerResultBox/ColorRect" unique_id=107502870]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="PlayerGuessHistoryContainer" type="VBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/PlayerResultBox" unique_id=112756729]
+layout_mode = 2
+
+[node name="EnemyResultBox" type="VBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=819138811]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/EnemyResultBox" unique_id=136910531]
+layout_mode = 2
+text = "敵方校對"
+
+[node name="ColorRect" type="ColorRect" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/EnemyResultBox" unique_id=1890139018]
+layout_mode = 2
+color = Color(1, 0.333333, 0.333333, 1)
+
+[node name="Label" type="Label" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/EnemyResultBox/ColorRect" unique_id=473982295]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EnemyGuessHistoryContainer" type="VBoxContainer" parent="UI/GuessHistoryPanel/ScrollContainer/VBoxContainer/HBoxContainer/EnemyResultBox" unique_id=1642280502]
+layout_mode = 2
+
+[node name="SpecialEnergyBar" type="ProgressBar" parent="UI" unique_id=1055774949]
+offset_left = 481.0
+offset_top = 25.0
+offset_right = 531.0
+offset_bottom = 52.0
+
+[node name="Label" type="Label" parent="UI/SpecialEnergyBar" unique_id=1218265147]
+layout_mode = 0
+offset_left = -19.0
+offset_top = -26.0
+offset_right = 93.0
+offset_bottom = -3.0
+text = "玩家特殊能量條"
+
+[node name="EnemyEnergyBar" type="ProgressBar" parent="UI" unique_id=995337674]
+offset_left = 780.0
+offset_top = 27.0
+offset_right = 830.0
+offset_bottom = 54.0
+
+[node name="Label" type="Label" parent="UI/EnemyEnergyBar" unique_id=2005378709]
+layout_mode = 0
+offset_left = -23.0
+offset_top = -27.0
+offset_right = 89.0
+offset_bottom = -4.0
+text = "敵人特殊能量條"
+
+[node name="GuessStatPanel" type="HBoxContainer" parent="UI" unique_id=2043641547]
+offset_left = 479.0
+offset_top = 125.99999
+offset_right = 519.0
+offset_bottom = 166.0
+scale = Vector2(1.7343304, 1.3814237)
+
+[node name="ALabel" type="Label" parent="UI/GuessStatPanel" unique_id=785152570]
+layout_mode = 2
+
+[node name="BLabel" type="Label" parent="UI/GuessStatPanel" unique_id=2055882770]
+layout_mode = 2
+
+[node name="CLabel" type="Label" parent="UI/GuessStatPanel" unique_id=1606117342]
+layout_mode = 2
+
+[node name="Battlefield" type="Node2D" parent="." unique_id=367403548]
+position = Vector2(54, 11)
+
+[node name="EnemyCastle" type="StaticBody2D" parent="Battlefield" unique_id=240557665]
+position = Vector2(1192, 505)
+collision_layer = 2
+script = ExtResource("2_wd1uf")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battlefield/EnemyCastle" unique_id=249982479]
+position = Vector2(-31.5, 66)
+shape = SubResource("RectangleShape2D_bxsma")
+
+[node name="Sprite2D" type="Sprite2D" parent="Battlefield/EnemyCastle" unique_id=1760347352]
+position = Vector2(0, 55.5)
+scale = Vector2(1, 2.73437)
+texture = SubResource("GradientTexture2D_0o8ui")
+
+[node name="EnemyHPLabel" type="Label" parent="Battlefield/EnemyCastle" unique_id=802165724]
+offset_left = -74.0
+offset_top = -58.0
+offset_right = 2.0
+offset_bottom = -35.0
+
+[node name="HitDetector" type="Area2D" parent="Battlefield/EnemyCastle" unique_id=426543574]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battlefield/EnemyCastle/HitDetector" unique_id=529459308]
+position = Vector2(-39, 68.5)
+scale = Vector2(1, 1.06526)
+shape = SubResource("RectangleShape2D_8gxew")
+
+[node name="PlayerCastle" type="StaticBody2D" parent="Battlefield" unique_id=2086194635]
+position = Vector2(-20, 502)
+collision_mask = 2
+script = ExtResource("3_0o8ui")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battlefield/PlayerCastle" unique_id=505672132]
+position = Vector2(30, 62)
+shape = SubResource("RectangleShape2D_bxsma")
+
+[node name="Sprite2D" type="Sprite2D" parent="Battlefield/PlayerCastle" unique_id=650551029]
+position = Vector2(0, 55.5)
+scale = Vector2(1, 2.73437)
+texture = SubResource("GradientTexture2D_0o8ui")
+
+[node name="PlayerHPLabel" type="Label" parent="Battlefield/PlayerCastle" unique_id=1094861227]
+offset_left = -32.0
+offset_top = -55.0
+offset_right = 38.0
+offset_bottom = -32.0
+text = "100/100"
+
+[node name="HitDetector" type="Area2D" parent="Battlefield/PlayerCastle" unique_id=1147655692]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battlefield/PlayerCastle/HitDetector" unique_id=991138411]
+position = Vector2(40, 67)
+shape = SubResource("RectangleShape2D_ledqy")
+
+[node name="PlayerUnits" type="Node" parent="Battlefield" unique_id=300849152]
+
+[node name="EnemyUnits" type="Node" parent="Battlefield" unique_id=980563732]
+
+[node name="ControlNodes" type="Node2D" parent="Battlefield" unique_id=79592872]
+
+[node name="GameController" type="Node" parent="." unique_id=1993413]
+script = ExtResource("2_bxsma")
+player_spawn_interval = 7.0
+enemy_spawn_interval = 7.0
+
+[node name="GuessEngine" type="Node" parent="." unique_id=1143704523]
+script = ExtResource("1_xj5yv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1634943126]
+position = Vector2(620, 686)
+scale = Vector2(21.4102, -0.882616)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=539239997]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-0.0233936, 10.2954)
+shape = SubResource("RectangleShape2D_lkrbl")
+debug_color = Color(1, 1, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1785321368]
+light_mask = 3
+visibility_layer = 3
+texture = SubResource("GradientTexture2D_wd1uf")
+
+[node name="UnitCounterUI" type="Control" parent="." unique_id=1052013528]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 551.0
+offset_top = 76.0
+offset_right = 751.0
+offset_bottom = 116.0
+
+[node name="PlayerCountLabel" type="Label" parent="UnitCounterUI" unique_id=1105943385]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="EnemyCountLabel" type="Label" parent="UnitCounterUI" unique_id=2034615191]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -1.0
+offset_right = 133.0
+offset_bottom = 22.0
+
+[connection signal="pressed" from="UI/UnitSummonPanel/SummonInfantry" to="GameController" method="_on_summon_infantry_pressed"]
+[connection signal="pressed" from="UI/UnitSummonPanel/summonking" to="GameController" method="summon_king_unit"]
