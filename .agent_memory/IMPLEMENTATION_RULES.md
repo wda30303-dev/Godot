@@ -52,15 +52,4 @@
 - `ControlNode.gd` 目前會在士兵位於節點中心並進行佔領時鎖住士兵移動。
 - 未來加入士氣推線時，必須確認士氣推線如何與節點佔領鎖定互動。
 
-## 記憶更新規則
 
-每次完成檔案修改後：
-
-- 有新事實：更新 `PROJECT_CONTEXT.md`
-- 有新規則：更新 `IMPLEMENTATION_RULES.md`
-- 有使用者確認的設計：更新 `DESIGN_DECISIONS.md`
-- 有新問題：更新 `OPEN_QUESTIONS.md`
-- 有未來功能調整：更新 `FEATURE_BACKLOG.md`
-- 有修改檔案：更新 `WORK_LOG.md`
-
-若沒有修改檔案，則不需要更新 `WORK_LOG.md`。
