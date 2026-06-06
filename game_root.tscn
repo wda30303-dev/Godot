@@ -196,15 +196,6 @@ offset_right = 89.0
 offset_bottom = -4.0
 text = "敵人特殊能量條"
 
-[node name="AddButton" type="Button" parent="UI" unique_id=273845610]
-layout_mode = 0
-offset_left = 587.0
-offset_top = 627.0
-offset_right = 653.0
-offset_bottom = 693.0
-theme_override_font_sizes/font_size = 28
-text = "+"
-
 [node name="GuessStatPanel" type="HBoxContainer" parent="UI" unique_id=2043641547]
 offset_left = 479.0
 offset_top = 125.99999
